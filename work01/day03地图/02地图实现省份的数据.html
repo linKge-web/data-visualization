@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>显示省份的数据</title>
+  <script src="./lib/echarts.min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+</head>
+<body>
+  <div style="width: 600px; height: 400px;"></div>
+  <script>
+    const myEcharts = echarts.init(document.querySelector('div'));
+    $.get('json/map/province/guangdong.json',function(ret) {
+      echarts.registerMap('guangdong',ret);
+      const option = {
+        geo: {
+          type: 'map',
+          map: "guangdong",
+          zoom: 1.2,  //设置方法的倍数
+        }
+      }
+      myEcharts.setOption(option);
+    });
+  </script>
+</body>
+</html>

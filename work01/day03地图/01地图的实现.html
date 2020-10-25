@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>地图的实现</title>
+  <script src="./lib/echarts.min.js"></script>
+  <script src="./lib/jquery.min.js"></script>
+</head>
+<body>
+  <div style="width: 600px; height: 400px"></div>
+  <script>
+    //1. ECharts最基本的代码结构
+    //2. 准备中国地图的矢量数据
+    //3. 使用Ajax获取矢量地图数据
+    //4. 在Ajax的回调函数中注册地图矢量数据 echarts.registerMap('chinaMap', 矢量地图数据)
+    //5. 配置geo的type为'map', map为'chinaMap' 
+    const myEcharts = echarts.init(document.querySelector('div'));
+    $.get('json/map/china.json',function(ret) {
+      // console.log(ret);
+      echarts.registerMap('chinaMap',ret);
+      const option = {
+        geo: {
+          type: 'map',
+          map: 'chinaMap',  //chinaMap需要和registerMap中的第一个参数保持一致
+
+          roam: true,  //允许拖放与拖动的效果
+          label: {
+            show: true,  //展示标签
+          },
+          zoom: 1,  //设置地图初始化缩放比例
+          center: [87.617733, 43.792818]  // 设置地图中心点的坐标
+        }
+      };
+      myEcharts.setOption(option);
+    })
+  </script>
+</body>
+</html>

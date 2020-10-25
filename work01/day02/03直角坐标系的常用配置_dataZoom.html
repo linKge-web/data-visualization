@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docu直角坐标系</title>
+  <script src="../day01/lib/echarts.min.js"></script>
+</head>
+<body>
+  <div style="width: 600px; height: 400px;"></div>
+  <script>
+    var xDataArr = ['张三', '李四', '王五', '闰土', '小明', '茅台', '二妞', '大强']
+    var yDataArr = [88, 92, 63, 77, 94, 80, 72, 86]
+    const myEcharts = echarts.init(document.querySelector('div'))
+    const option = {
+      xAxis: {
+        type: "category",
+        data: xDataArr,
+      },
+      yAxis: {
+        type: "value",
+      },
+      series: [
+        {
+          type: "bar",
+          name: "语文",
+          data: yDataArr,
+          // 用点的方式显示最大值和最小值
+          markPoint: {
+            data: [
+              {
+                type: "max",
+                name: "最大值"
+              },
+              { 
+                type: "min",
+                name: "最小值"
+              }
+            ]
+          },
+          markLine: {
+            data: [
+              {
+                type: 'average',
+                name: "平均值"
+              }
+            ]
+          },
+          //设置数值显示的样式
+          label: {
+            show: true,
+            position: "top",
+            // 旋转
+            rotate: 60
+          },
+          // 柱子的宽度
+          barWidth: '30%'
+        }
+      ],
+
+      // 内置自带的box工具
+      // toolbox: {
+      //   feature: {
+      //     //区域缩放器
+      //     dataZoom: {}
+      //   }
+      // }
+      // 控制区域缩放效果的实现
+      dataZoom: [
+        // 一个对象是x轴，一个对象是y轴，但是需要指名是哪个轴
+        {
+          type: 'slider', // 缩放的类型  slide代表滑块  inside代表依靠鼠标滚轮
+          //设置控制哪个轴
+          xAxisIndex: 0,   //0 代表第一个x轴
+        },
+        {
+          type: 'slider',
+          yAxisIndex: 0, 
+          // 设置初始显示的默认值
+          start: 0,
+          end: 80
+        }
+      ],
+
+    };
+    myEcharts.setOption(option);
+  </script>
+</body>
+</html>

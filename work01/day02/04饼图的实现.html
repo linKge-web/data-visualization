@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>饼图</title>
+  <script src="../day01/lib/echarts.min.js"></script>
+</head>
+<body>
+  <div style="width: 600px; height: 400px;"></div>
+
+  <script>
+     //1. ECharts最基本的代码结构
+    //2. 准备数据[{name:???, value:??? },{}]
+    //   淘宝: 11231  京东: 22673  唯品会: 6123  1号店: 8989   聚美优品: 6700
+    //3. 将type的值设置为pie
+    const myEcharts = echarts.init(document.querySelector('div'));
+    const pieData = [
+      {
+        name: '淘宝',
+        value: 11231
+      },
+      {
+        name: '京东',
+        value: 22673
+      },
+      {
+        name: '唯品会',
+        value: 6123
+      },
+      {
+        name: '唯品会',
+        value: 6123
+      }, 
+      {
+        name: '聚美优品',
+        value: 6700
+      }
+    ];
+    const option = {
+      // 饼图没有xy坐标轴
+      series: {
+        type: 'pie',
+        data: pieData
+      }
+    }
+    myEcharts.setOption(option);
+  </script>
+</body>
+</html>
